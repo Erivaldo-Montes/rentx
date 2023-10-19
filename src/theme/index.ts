@@ -14,12 +14,13 @@ export const theme = {
   FONT_FAMILY: {
     "archivo-bold": "Archivo_700Bold",
     "archivo-semiBold": "Archivo_600SemiBold",
-    "inter-regular": "inter_400Regular",
+    "inter-regular": "Inter_400Regular",
     "inter-bold": "Inter_700Bold",
     "inter-medium": "Inter_500Medium",
   },
   FONT_SIZE: {
     "4XL": 40,
+    xl: 20,
     sm: 15,
   },
   LINE_HEIGH: {
