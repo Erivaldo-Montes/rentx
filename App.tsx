@@ -40,6 +40,8 @@ export default function App() {
   }
   return (
     <NavigationContainer>
+      <ThemeProvider theme={theme}>
+      </ThemeProvider>
     </NavigationContainer>
   );
 }
