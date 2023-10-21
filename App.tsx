@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { StatusBar } from "react-native";
 import { Login } from "./src/screens/Login";
 import { ThemeProvider } from "styled-components/native";
+import Toast from "react-native-toast-message";
 import * as NavigationBar from "expo-navigation-bar";
 import { theme } from "./src/theme";
 import { NavigationContainer } from "@react-navigation/native";
@@ -46,6 +47,7 @@ export default function App() {
           backgroundColor={"transparent"}
           translucent
         />
+        <Toast />
       </ThemeProvider>
     </NavigationContainer>
   );
