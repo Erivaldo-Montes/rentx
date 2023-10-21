@@ -7,6 +7,8 @@ import * as NavigationBar from "expo-navigation-bar";
 import { theme } from "./src/theme";
 import { NavigationContainer } from "@react-navigation/native";
 
+import { AppRoute } from "./src/routes/app.route";
+
 import {
   useFonts,
   Archivo_700Bold,
@@ -47,6 +49,7 @@ export default function App() {
           backgroundColor={"transparent"}
           translucent
         />
+        <AppRoute />
         <Toast />
       </ThemeProvider>
     </NavigationContainer>
