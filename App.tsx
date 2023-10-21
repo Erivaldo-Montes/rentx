@@ -41,6 +41,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
+        <StatusBar
+          barStyle={"dark-content"}
+          backgroundColor={"transparent"}
+          translucent
+        />
       </ThemeProvider>
     </NavigationContainer>
   );
