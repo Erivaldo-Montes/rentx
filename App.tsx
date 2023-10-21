@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { StatusBar } from "react-native";
 import { Login } from "./src/screens/Login";
 import { ThemeProvider } from "styled-components/native";
+import * as NavigationBar from "expo-navigation-bar";
 import { theme } from "./src/theme";
 import {
   useFonts,
@@ -21,6 +23,15 @@ export default function App() {
     Archivo_700Bold,
     Archivo_600SemiBold,
   });
+
+  useEffect(() => {
+    async function navBar() {
+      await NavigationBar.setBackgroundColorAsync("#f4f5f6");
+      await NavigationBar.setButtonStyleAsync("dark");
+    }
+
+    navBar();
+  }, []);
 
   if (!fontsLoaded && !fontsError) {
     return null;
