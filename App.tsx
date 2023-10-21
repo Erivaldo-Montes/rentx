@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components/native";
 import Toast from "react-native-toast-message";
 import * as NavigationBar from "expo-navigation-bar";
 import { theme } from "./src/theme";
+import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { AppRoute } from "./src/routes/app.route";
