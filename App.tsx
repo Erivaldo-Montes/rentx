@@ -4,6 +4,8 @@ import { Login } from "./src/screens/Login";
 import { ThemeProvider } from "styled-components/native";
 import * as NavigationBar from "expo-navigation-bar";
 import { theme } from "./src/theme";
+import { NavigationContainer } from "@react-navigation/native";
+
 import {
   useFonts,
   Archivo_700Bold,
@@ -37,13 +39,7 @@ export default function App() {
     return null;
   }
   return (
-    <ThemeProvider theme={theme}>
-      <StatusBar
-        barStyle={"dark-content"}
-        backgroundColor={"transparent"}
-        translucent
-      />
-      <Login />
-    </ThemeProvider>
+    <NavigationContainer>
+    </NavigationContainer>
   );
 }
