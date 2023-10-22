@@ -1,12 +1,13 @@
+import { useEffect, useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useNavigation } from "@react-navigation/native";
 import { SignUpHeader } from "@/components/SignUpHeader";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { Container, Form, FormTitle, ErrorMessageText } from "./styles";
-import { useEffect, useState } from "react";
 
 const confirmPasswordSchema = yup.object({
   password: yup
@@ -24,7 +25,7 @@ type confirmPasswordData = yup.InferType<typeof confirmPasswordSchema>;
 
 export function SignUpSecondStep() {
   const [isDisableButton, setIsDisableButton] = useState(true);
-
+  const navigation = useNavigation();
   const {
     control,
     handleSubmit,
@@ -40,6 +41,11 @@ export function SignUpSecondStep() {
 
   function handleRegister(data: confirmPasswordData) {
     console.log(data);
+    navigation.navigate("confirmScreen", {
+      title: "Conta criada",
+      message: "",
+      nextScreenRoute: "signIn",
+    });
   }
 
   const watchPassword = watch("password");
@@ -67,12 +73,13 @@ export function SignUpSecondStep() {
         <Controller
           name="password"
           control={control}
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               icon="lock"
               inputType="password"
               placeholder="Senha"
               onChangeText={onChange}
+              value={value}
             />
           )}
         />
@@ -86,12 +93,13 @@ export function SignUpSecondStep() {
         <Controller
           name="confirmPassword"
           control={control}
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               icon="lock"
               inputType="password"
               placeholder="Repetir senha"
               onChangeText={onChange}
+              value={value}
             />
           )}
         />

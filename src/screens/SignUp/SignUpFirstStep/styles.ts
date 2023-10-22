@@ -9,7 +9,7 @@ export const Container = styled.View`
 export const Title = styled.Text`
   font-size: ${(props) => props.theme.FONT_SIZE["4XL"]}px;
   font-family: ${(props) => props.theme.FONT_FAMILY["archivo-semiBold"]};
-  color: ${(props) => props.theme.COLORS["gray-800"]};
+  color: ${(props) => props.theme.COLORS["gray-900"]};
   padding: 8px;
 `;
 
@@ -27,7 +27,7 @@ export const FormTitle = styled.Text`
 
   font-family: ${(props) => props.theme.FONT_FAMILY["archivo-semiBold"]};
   font-size: ${(props) => props.theme.FONT_SIZE.xl}px;
-  color: ${(props) => props.theme.COLORS["gray-800"]};
+  color: ${(props) => props.theme.COLORS["gray-900"]};
 `;
 
 export const Form = styled.View`
