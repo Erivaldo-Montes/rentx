@@ -32,6 +32,10 @@ export function SignUpSecondStep() {
     formState: { errors },
   } = useForm<confirmPasswordData>({
     resolver: yupResolver(confirmPasswordSchema),
+    defaultValues: {
+      confirmPassword: "",
+      password: "",
+    },
   });
 
   function handleRegister(data: confirmPasswordData) {
