@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components/native";
+import { TouchableOpacityProps } from "react-native";
 
-interface Props {
+interface Props extends TouchableOpacityProps {
   styleButton: "WHITE" | "GREEN" | "RED";
 }
 
@@ -22,6 +23,8 @@ export const Container = styled.TouchableOpacity<Props>`
         `;
     }
   }};
+
+  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
 
   width: 100%;
   height: 56px;
