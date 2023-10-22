@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { StatusBar } from "react-native";
-import { Login } from "./src/screens/Login";
 import { ThemeProvider } from "styled-components/native";
 import Toast from "react-native-toast-message";
 import * as NavigationBar from "expo-navigation-bar";
@@ -11,7 +10,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AppRoute } from "./src/routes/app.route";
 
 import {
-  useFonts,
   Archivo_700Bold,
   Archivo_600SemiBold,
 } from "@expo-google-fonts/archivo";
@@ -20,6 +18,8 @@ import {
   Inter_700Bold,
   Inter_500Medium,
 } from "@expo-google-fonts/inter";
+
+import { SignUpFirstStep } from "./src/screens/SignUp/SignUpFirstStep";
 
 export default function App() {
   const [fontsLoaded, fontsError] = useFonts({

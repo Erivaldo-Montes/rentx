@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TextInputProps } from "react-native";
 import { Feather } from "@expo/vector-icons";
+
 import { useState } from "react";
 import { Container, InputText, IconContainer } from "./styles";
 import { useTheme } from "styled-components/native";
@@ -9,9 +10,16 @@ interface Props extends TextInputProps {
   // captura o nomes do icones
   icon: React.ComponentProps<typeof Feather>["name"];
   inputType?: "password" | "text";
+  errorMessage?: string | null;
 }
 
-export function Input({ icon, inputType = "text", ...rest }: Props) {
+export function Input({
+  icon,
+  inputType = "text",
+  errorMessage = null,
+  onChangeText,
+  ...rest
+}: Props) {
   const [inputContent, setInputContent] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -24,8 +32,13 @@ export function Input({ icon, inputType = "text", ...rest }: Props) {
   function handleOnBlur() {
     setIsFocused(false);
   }
+
+  function handleShowPassword() {
+    setShowPassword((state) => !state);
+  }
+
   return (
-    <Container isFocused={isFocused}>
+    <Container isFocused={isFocused} isError={!!errorMessage}>
       <IconContainer>
         <Feather
           name={icon}
@@ -38,8 +51,13 @@ export function Input({ icon, inputType = "text", ...rest }: Props) {
       <InputText
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
-        onChangeText={(e) => setInputContent(e)}
-        secureTextEntry={!showPassword}
+        secureTextEntry={!showPassword && inputType === "password"}
+        onChangeText={(e) => {
+          if (onChangeText) {
+            onChangeText(e);
+          }
+          setInputContent(e);
+        }}
         {...rest}
       />
       {inputType === "password" && (
@@ -50,7 +68,7 @@ export function Input({ icon, inputType = "text", ...rest }: Props) {
                 name={"eye-off"}
                 size={24}
                 color={theme.COLORS["gray-500"]}
-                onPress={() => setShowPassword((state) => !state)}
+                onPress={handleShowPassword}
               />
             </IconContainer>
           ) : (
@@ -59,7 +77,7 @@ export function Input({ icon, inputType = "text", ...rest }: Props) {
                 name={"eye"}
                 size={24}
                 color={theme.COLORS["gray-500"]}
-                onPress={() => setShowPassword((state) => !state)}
+                onPress={handleShowPassword}
               />
             </IconContainer>
           )}
@@ -68,3 +86,5 @@ export function Input({ icon, inputType = "text", ...rest }: Props) {
     </Container>
   );
 }
+
+("memorisedProps");

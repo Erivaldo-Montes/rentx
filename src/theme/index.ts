@@ -1,6 +1,7 @@
 export const theme = {
   COLORS: {
     "gray-100": "#F4F5F6",
+    "gray-400": "#AEAEB3",
     "gray-500": "#7A7A80",
     "gray-700": "#47474D",
     "gray-800": "#41414D",
@@ -22,6 +23,7 @@ export const theme = {
     "4XL": 40,
     xl: 20,
     sm: 15,
+    xs: 12,
   },
   LINE_HEIGH: {
     "leading-6": 25,

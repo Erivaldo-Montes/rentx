@@ -2,6 +2,7 @@ import styled, { css } from "styled-components/native";
 
 interface Props {
   isFocused: boolean;
+  isError: boolean;
 }
 
 export const Container = styled.View<Props>`
@@ -14,6 +15,13 @@ export const Container = styled.View<Props>`
     if (props.isFocused) {
       return css`
         border-bottom-color: ${props.theme.COLORS["red-600"]};
+      `;
+    }
+  }}
+  ${(props) => {
+    if (props.isError) {
+      return css`
+        border-color: ${props.theme.COLORS["red-600"]};
       `;
     }
   }}

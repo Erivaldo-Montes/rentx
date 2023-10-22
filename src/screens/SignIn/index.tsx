@@ -1,0 +1,164 @@
+import { useState } from "react";
+import {
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+} from "react-native";
+import { useForm, Controller } from "react-hook-form";
+import * as yup from "yup";
+import { ErrorMessage } from "@hookform/error-message";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { MaterialIcons } from "@expo/vector-icons";
+import Animated, { FadeInDown } from "react-native-reanimated";
+import { useNavigation } from "@react-navigation/native";
+
+import {
+  Container,
+  Title,
+  Subtitle,
+  Form,
+  Buttons,
+  Header,
+  ErrorMessageText,
+} from "./styles";
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
+import { useTheme } from "styled-components/native";
+
+const SignInSchema = yup.object({
+  email: yup
+    .string()
+    .required("e-mail é obrigatório")
+    .email("Insira um e-mail válido"),
+  password: yup.string().required("senha é obrigatória"),
+});
+
+type SignInData = yup.InferType<typeof SignInSchema>;
+
+export function SignIn() {
+  const [keyboardShow, setKeyboardShow] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInData>({
+    resolver: yupResolver(SignInSchema),
+  });
+  const theme = useTheme();
+  const navigation = useNavigation();
+
+  function handleLogin(data: SignInData) {
+    console.log(data);
+  }
+
+  function hideKeyboard() {
+    Keyboard.dismiss();
+  }
+
+  Keyboard.addListener("keyboardDidShow", () => {
+    setKeyboardShow(true);
+  });
+
+  Keyboard.addListener("keyboardDidHide", () => {
+    setKeyboardShow(false);
+  });
+
+  return (
+    <KeyboardAvoidingView
+      behavior="padding"
+      enabled
+      style={{
+        flex: 1,
+        backgroundColor: theme.COLORS["gray-100"],
+      }}
+    >
+      <TouchableWithoutFeedback onPress={hideKeyboard}>
+        <Container>
+          {!keyboardShow ? (
+            <Animated.View entering={FadeInDown}>
+              <Title>Estamos {"\n"}quase lá</Title>
+            </Animated.View>
+          ) : (
+            <Header>
+              <TouchableOpacity onPress={hideKeyboard}>
+                <MaterialIcons
+                  name="chevron-left"
+                  size={24}
+                  color={theme.COLORS["gray-500"]}
+                />
+              </TouchableOpacity>
+            </Header>
+          )}
+
+          <Subtitle>
+            Faça seu login para começar {"\n"}uma experiência incrível.
+          </Subtitle>
+
+          <Form>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  icon="mail"
+                  keyboardType="email-address"
+                  placeholder="E-mail"
+                  autoCapitalize="none"
+                  errorMessage={errors.email?.message}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ message }) => (
+                <ErrorMessageText>{message}</ErrorMessageText>
+              )}
+            />
+            <Controller
+              name="password"
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  icon="lock"
+                  placeholder="Senha"
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  inputType="password"
+                  errorMessage={errors.email?.message}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="password"
+              render={({ message }) => (
+                <ErrorMessageText>{message}</ErrorMessageText>
+              )}
+            />
+          </Form>
+
+          <Buttons>
+            <Button
+              styleButtom="RED"
+              title="Login"
+              onPress={handleSubmit(handleLogin)}
+            />
+            {!keyboardShow && (
+              <Button
+                styleButtom="WHITE"
+                title="Criar conta gratuita"
+                onPress={() => navigation.navigate("signUpFirstStep")}
+              />
+            )}
+          </Buttons>
+        </Container>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  );
+}
