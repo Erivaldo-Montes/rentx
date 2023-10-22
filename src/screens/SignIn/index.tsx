@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Keyboard,
   TouchableOpacity,
@@ -38,8 +38,12 @@ type SignInData = yup.InferType<typeof SignInSchema>;
 
 export function SignIn() {
   const [keyboardShow, setKeyboardShow] = useState(false);
+  const [inputsIsEmpty, setInputIsEmpty] = useState(false);
+  const [isFormError, setIsFormError] = useState(false);
+
   const {
     control,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<SignInData>({
@@ -64,6 +68,24 @@ export function SignIn() {
     setKeyboardShow(false);
   });
 
+  const watchAll = watch();
+
+  useEffect(() => {
+    const inputsValues = Object.values(watchAll);
+    if (inputsValues.includes("")) {
+      setInputIsEmpty(true);
+    } else {
+      setInputIsEmpty(false);
+    }
+    setIsFormError(() => {
+      if (Object.values(errors).length === 0) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+  }, [watchAll, errors]);
+
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -73,7 +95,7 @@ export function SignIn() {
         backgroundColor: theme.COLORS["gray-100"],
       }}
     >
-      <TouchableWithoutFeedback onPress={hideKeyboard}>
+      <TouchableWithoutFeedback onPress={hideKeyboard} style={{ flex: 1 }}>
         <Container>
           {!keyboardShow ? (
             <Animated.View entering={FadeInDown}>
@@ -148,6 +170,7 @@ export function SignIn() {
               styleButtom="RED"
               title="Login"
               onPress={handleSubmit(handleLogin)}
+              disabled={isFormError || inputsIsEmpty}
             />
             {!keyboardShow && (
               <Button
