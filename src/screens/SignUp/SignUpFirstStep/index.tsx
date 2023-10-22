@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TouchableWithoutFeedback,
   Keyboard,
@@ -38,16 +38,27 @@ const SignUpFirstSchema = yup.object({
 type SignUpFirstStepData = yup.InferType<typeof SignUpFirstSchema>;
 
 export function SignUpFirstStep() {
-  const theme = useTheme();
   const [keyboardShow, setKeyboardShow] = useState(false);
+  const [inputsIsEmpty, setInputsIsEmpty] = useState(true);
+  const [isFormError, setIsFormError] = useState(false);
+
+  const theme = useTheme();
   const navigation = useNavigation();
   const {
     handleSubmit,
+    watch,
     formState: { errors },
     control,
   } = useForm<SignUpFirstStepData>({
     resolver: yupResolver(SignUpFirstSchema),
+    defaultValues: {
+      driver_license: "",
+      name: "",
+      email: "",
+    },
   });
+
+  const watchAll = watch();
 
   function hideKeyboard() {
     Keyboard.dismiss();
@@ -64,6 +75,23 @@ export function SignUpFirstStep() {
   Keyboard.addListener("keyboardDidHide", () => {
     setKeyboardShow(false);
   });
+
+  useEffect(() => {
+    const valueArray = Object.values(watchAll);
+    if (valueArray.includes("")) {
+      setInputsIsEmpty(true);
+    } else {
+      setInputsIsEmpty(false);
+    }
+
+    setIsFormError(() => {
+      if (Object.values(errors).length === 0) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+  }, [watchAll, errors]);
 
   return (
     <KeyboardAvoidingView
@@ -156,6 +184,7 @@ export function SignUpFirstStep() {
           <Button
             styleButtom="RED"
             title="Proxímo"
+            disabled={inputsIsEmpty || isFormError}
             onPress={handleSubmit(handleSignFirstStepSubmit)}
           />
         </Container>
