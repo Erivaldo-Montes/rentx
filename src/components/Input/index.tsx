@@ -86,5 +86,3 @@ export function Input({
     </Container>
   );
 }
-
-("memorisedProps");
