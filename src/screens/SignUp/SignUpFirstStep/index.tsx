@@ -8,6 +8,7 @@ import Animated, { FadeInUp } from "react-native-reanimated";
 import { useTheme } from "styled-components/native";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
+import * as NavigationBar from "expo-navigation-bar";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
@@ -66,7 +67,6 @@ export function SignUpFirstStep() {
 
   function handleSignFirstStepSubmit(data: SignUpFirstStepData) {
     navigation.navigate("signUpSecondStep");
-    console.log(data);
   }
 
   Keyboard.addListener("keyboardDidShow", () => {
@@ -92,6 +92,15 @@ export function SignUpFirstStep() {
       }
     });
   }, [watchAll, errors]);
+
+  useEffect(() => {
+    async function navBar() {
+      await NavigationBar.setBackgroundColorAsync("#f4f5f6");
+      await NavigationBar.setButtonStyleAsync("dark");
+    }
+
+    navBar();
+  }, []);
 
   return (
     <KeyboardAvoidingView
