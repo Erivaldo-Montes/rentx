@@ -44,6 +44,19 @@ export function ConfirmScreen() {
     }
     NavBar();
   }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const subscription = BackHandler.addEventListener(
+        "hardwareBackPress",
+        () => {
+          handleSuccess();
+          return true;
+        }
+      );
+
+      return () => subscription.remove();
+    }, [])
+  );
   return (
     <Container>
       <StatusBar barStyle={"light-content"} />

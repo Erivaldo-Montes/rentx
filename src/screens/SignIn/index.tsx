@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { MaterialIcons } from "@expo/vector-icons";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
-
+import * as NavigationBar from "expo-navigation-bar";
 import {
   Container,
   Title,
@@ -52,9 +52,7 @@ export function SignIn() {
   const theme = useTheme();
   const navigation = useNavigation();
 
-  function handleLogin(data: SignInData) {
-    console.log(data);
-  }
+  function handleLogin(data: SignInData) {}
 
   function hideKeyboard() {
     Keyboard.dismiss();
@@ -85,6 +83,15 @@ export function SignIn() {
       }
     });
   }, [watchAll, errors]);
+
+  useEffect(() => {
+    async function navBar() {
+      await NavigationBar.setBackgroundColorAsync("#f4f5f6");
+      await NavigationBar.setButtonStyleAsync("dark");
+    }
+
+    navBar();
+  }, []);
 
   return (
     <KeyboardAvoidingView

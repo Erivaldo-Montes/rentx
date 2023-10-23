@@ -5,6 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useNavigation } from "@react-navigation/native";
 import { SignUpHeader } from "@/components/SignUpHeader";
+import * as NavigationBar from "expo-navigation-bar";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { Container, Form, FormTitle, ErrorMessageText } from "./styles";
@@ -40,7 +41,6 @@ export function SignUpSecondStep() {
   });
 
   function handleRegister(data: confirmPasswordData) {
-    console.log(data);
     navigation.navigate("confirmScreen", {
       title: "Conta criada",
       message: "",
@@ -62,8 +62,16 @@ export function SignUpSecondStep() {
         return false;
       }
     });
-    console.log(isDisableButton);
   }, [watchConfirmPassword, watchPassword, errors]);
+
+  useEffect(() => {
+    async function navBar() {
+      await NavigationBar.setBackgroundColorAsync("#f4f5f6");
+      await NavigationBar.setButtonStyleAsync("dark");
+    }
+
+    navBar();
+  }, []);
 
   return (
     <Container>
