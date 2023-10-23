@@ -8,5 +8,6 @@ declare namespace ReactNavigation {
       message: string;
       nextScreenRoute: "signIn";
     };
+    home: undefined;
   }
 }
