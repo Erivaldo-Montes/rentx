@@ -1,13 +1,14 @@
 declare namespace ReactNavigation {
   export interface RootParamList {
-    signIn: undefined;
-    signUpFirstStep: undefined;
-    signUpSecondStep: undefined;
-    confirmScreen: {
+    SignIn: undefined;
+    SignUpFirstStep: undefined;
+    SignUpSecondStep: undefined;
+    ConfirmScreen: {
       title: string;
       message: string;
       nextScreenRoute: "signIn";
     };
-    home: undefined;
+    Home: undefined;
+    CarDetails: { carId: string };
   }
 }

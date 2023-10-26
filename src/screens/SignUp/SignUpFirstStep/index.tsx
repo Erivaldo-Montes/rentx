@@ -21,7 +21,7 @@ import {
   ErrorMessageText,
 } from "./styles";
 import { Input } from "../../../components/Input";
-import { SignUpHeader } from "../../../components/SignUpHeader";
+import { BulletHeader } from "../../../components/BulletHeader";
 import { Button } from "../../../components/Button";
 
 const SignUpFirstSchema = yup.object({
@@ -66,7 +66,7 @@ export function SignUpFirstStep() {
   }
 
   function handleSignFirstStepSubmit(data: SignUpFirstStepData) {
-    navigation.navigate("signUpSecondStep");
+    navigation.navigate("SignUpSecondStep");
   }
 
   Keyboard.addListener("keyboardDidShow", () => {
@@ -110,7 +110,7 @@ export function SignUpFirstStep() {
     >
       <TouchableWithoutFeedback onPress={hideKeyboard}>
         <Container>
-          <SignUpHeader stepsActive={1} />
+          <BulletHeader bulletActive={1} bulletsNumber={2} />
           {/* oculta o titulo quando o teclado estiver ativo */}
           {!keyboardShow && (
             <Animated.View entering={FadeInUp.duration(100)}>

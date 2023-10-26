@@ -183,7 +183,7 @@ export function SignIn() {
               <Button
                 styleButtom="WHITE"
                 title="Criar conta gratuita"
-                onPress={() => navigation.navigate("signUpFirstStep")}
+                onPress={() => navigation.navigate("SignUpFirstStep")}
               />
             )}
           </Buttons>
