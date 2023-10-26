@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useNavigation } from "@react-navigation/native";
-import { SignUpHeader } from "@/components/SignUpHeader";
+import { BulletHeader } from "@/components/BulletHeader";
 import * as NavigationBar from "expo-navigation-bar";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
@@ -41,7 +41,7 @@ export function SignUpSecondStep() {
   });
 
   function handleRegister(data: confirmPasswordData) {
-    navigation.navigate("confirmScreen", {
+    navigation.navigate("ConfirmScreen", {
       title: "Conta criada",
       message: "",
       nextScreenRoute: "signIn",
@@ -75,7 +75,7 @@ export function SignUpSecondStep() {
 
   return (
     <Container>
-      <SignUpHeader stepsActive={2} />
+      <BulletHeader bulletActive={2} bulletsNumber={2} />
       <Form>
         <FormTitle>02. Senha</FormTitle>
         <Controller
