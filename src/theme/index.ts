@@ -20,6 +20,7 @@ export const theme = {
     "inter-regular": "Inter_400Regular",
     "inter-bold": "Inter_700Bold",
     "inter-medium": "Inter_500Medium",
+    "archivo-medium": "Archivo_500Medium",
   },
   FONT_SIZE: {
     "4XL": 40,
@@ -27,6 +28,7 @@ export const theme = {
     xl: 20,
     sm: 15,
     xs: 12,
+    xss: 10,
   },
   LINE_HEIGH: {
     "leading-6": 25,
