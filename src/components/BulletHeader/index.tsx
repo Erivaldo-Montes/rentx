@@ -2,28 +2,34 @@ import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "styled-components/native";
-import { Container, StepVisualization, Step } from "./styles";
+import { Container, StepVisualization, Bullet } from "./styles";
 
 interface Props {
-  stepsActive: number;
+  bulletActive: number;
+  bulletsNumber: number;
 }
 
-export function SignUpHeader({ stepsActive }: Props) {
+export function BulletHeader({ bulletsNumber, bulletActive }: Props) {
   const navigation = useNavigation();
-  const steps = new Array(1, 2);
+  const bullets = [];
+
+  for (let i = 0; i < bulletsNumber; i++) {
+    bullets.push(i);
+  }
 
   function handleBack() {
     navigation.goBack();
   }
 
-  const activeSteps = steps.map((_, index) => {
-    if (index === stepsActive - 1) {
+  const activeBullet = bullets.map((bullet) => {
+    if (bullet === bulletActive - 1) {
       return true;
     } else {
       return false;
     }
   });
 
+  console.log(activeBullet);
   const theme = useTheme();
   return (
     <Container>
@@ -35,8 +41,9 @@ export function SignUpHeader({ stepsActive }: Props) {
         />
       </TouchableOpacity>
       <StepVisualization>
-        <Step isActive={activeSteps[0]} />
-        <Step isActive={activeSteps[1]} />
+        {activeBullet.map((bullet, index) => (
+          <Bullet isActive={bullet} key={index} />
+        ))}
       </StepVisualization>
     </Container>
   );

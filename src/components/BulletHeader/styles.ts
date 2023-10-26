@@ -1,7 +1,7 @@
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import styled from "styled-components/native";
 
-interface StepProps {
+interface BulletProps {
   isActive: boolean;
 }
 
@@ -20,7 +20,7 @@ export const StepVisualization = styled.View`
   flex-direction: row;
 `;
 
-export const Step = styled.View<StepProps>`
+export const Bullet = styled.View<BulletProps>`
   height: 4px;
   width: 4px;
 
