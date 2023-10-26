@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
+import { BackHandler } from "react-native";
 import {
   Container,
   ImageView,
@@ -7,13 +8,16 @@ import {
   ButtonSubmit,
   ButtonText,
 } from "./style";
+import LottieView from "lottie-react-native";
 import { useTheme } from "styled-components/native";
 import BackgroundLogo from "../../assets/backgroundLogo.svg";
 import { Dimensions, StatusBar } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  useNavigation,
+  useRoute,
+  useFocusEffect,
+} from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
-
-import LottieView from "lottie-react-native";
 
 const WIDTH = Dimensions.get("window").width;
 const ORIGINAL_WIDTH = 375;
@@ -44,6 +48,7 @@ export function ConfirmScreen() {
     }
     NavBar();
   }, []);
+
   useFocusEffect(
     useCallback(() => {
       const subscription = BackHandler.addEventListener(
