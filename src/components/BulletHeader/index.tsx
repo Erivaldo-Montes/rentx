@@ -29,7 +29,6 @@ export function BulletHeader({ bulletsNumber, bulletActive }: Props) {
     }
   });
 
-  console.log(activeBullet);
   const theme = useTheme();
   return (
     <Container>
