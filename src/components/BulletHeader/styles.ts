@@ -9,6 +9,7 @@ export const Container = styled.View`
   margin-top: ${getStatusBarHeight() + 18}px;
   margin-bottom: 60px;
   width: 100%;
+  padding: 0 24px;
 
   justify-content: space-between;
   align-items: center;
@@ -21,8 +22,8 @@ export const StepVisualization = styled.View`
 `;
 
 export const Bullet = styled.View<BulletProps>`
-  height: 4px;
-  width: 4px;
+  height: 6px;
+  width: 6px;
 
   border-radius: 999px;
 
