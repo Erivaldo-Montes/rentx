@@ -26,7 +26,7 @@ const ASPECT_RATIO = ORIGINAL_WIDTH / ORIGINAL_HEIGHT;
 
 type ParamsNavigation = {
   title: string;
-  message: string;
+  message?: string;
   nextScreenRoute: any;
 };
 
