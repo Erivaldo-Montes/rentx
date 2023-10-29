@@ -2,9 +2,10 @@ import { Container, CardsList } from "./styles";
 import { HomeHeader } from "@/components/HomeHeader";
 import { FlatList, StatusBar } from "react-native";
 import { CarCard } from "@/components/CarCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CarDto } from "@/DTOs/Car";
 import { axios } from "@/services/api";
+import { useFocusEffect } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
 
 export function Home() {
@@ -18,18 +19,18 @@ export function Home() {
     }
   }
 
-  useEffect(() => {
+  useFocusEffect(() => {
     fetchCars();
-  }, []);
+  });
 
-  useEffect(() => {
+  useFocusEffect(() => {
     async function navBar() {
       await NavigationBar.setBackgroundColorAsync("#f4f5f6");
       await NavigationBar.setButtonStyleAsync("dark");
     }
 
     navBar();
-  }, []);
+  });
 
   return (
     <Container>
