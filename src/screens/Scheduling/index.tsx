@@ -10,7 +10,7 @@ import { StatusBar } from "react-native";
 import { Button } from "@/components/Button";
 import * as NavigationBar from "expo-navigation-bar";
 import { format } from "date-fns";
-
+import { useNavigation } from "@react-navigation/native";
 import {
   Container,
   BackButtonHeader,
@@ -40,6 +40,16 @@ export function Scheduling() {
   });
   const [lastSelected, setLastSelected] = useState<DayProps>();
   const [markedDate, setMarkedDate] = useState<MarkedDateProps>();
+
+  const navigation = useNavigation();
+
+  function handleBack() {
+    navigation.goBack();
+  }
+
+  function handleConfirm() {
+    navigation.navigate("ResumeRent");
+  }
 
   function handleDayPress(day: DayProps) {
     let start = lastSelected?.timestamp ? lastSelected : day;
@@ -81,7 +91,7 @@ export function Scheduling() {
       />
       <Header>
         <BackButtonHeader>
-          <BackButton>
+          <BackButton onPress={handleBack}>
             <MaterialIcons
               name="chevron-left"
               color={theme.COLORS.white}
@@ -111,7 +121,12 @@ export function Scheduling() {
         />
       </CalendarContainer>
       <ButtonContainer>
-        <Button title="Confirmar" styleButtom="RED" />
+        <Button
+          title="Confirmar"
+          styleButtom="RED"
+          disabled={date.startDate === ""}
+          onPress={handleConfirm}
+        />
       </ButtonContainer>
     </Container>
   );
