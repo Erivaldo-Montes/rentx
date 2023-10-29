@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import * as NavigationBar from "expo-navigation-bar";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import { BulletHeader } from "@/components/BulletHeader";
 import { axios } from "@/services/api";
 import { CarDto } from "@/DTOs/Car";
@@ -46,6 +46,8 @@ export function CarDetails() {
   const [bullets, setBullets] = useState<BulletProps>();
   const [isLoading, setIsLoading] = useState(true);
 
+  const navigation = useNavigation();
+
   const route = useRoute();
   const { carId } = route.params as Params;
 
@@ -67,6 +69,14 @@ export function CarDetails() {
       activeBullets: visibleItem + 1,
       bulletsNumber: numberOfPhotos,
     });
+  }
+
+  async function handleRentPeriod() {
+    try {
+      await navigation.navigate("Scheduling");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function fetchCarInfo() {
@@ -145,7 +155,11 @@ export function CarDetails() {
             </BodyContent>
           </Animated.ScrollView>
           <ButtonContainer>
-            <Button title="Escolher o período do aluguel" styleButtom="RED" />
+            <Button
+              title="Escolher o período do aluguel"
+              styleButtom="RED"
+              onPress={handleRentPeriod}
+            />
           </ButtonContainer>
         </>
       )}
