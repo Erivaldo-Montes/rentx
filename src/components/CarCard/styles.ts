@@ -1,19 +1,20 @@
 import styled from "styled-components/native";
+import { horizontalScale, verticalScale } from "@/utils/metrics";
 
 export const Container = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.COLORS.white};
-  margin-top: 16px;
+  margin-top: ${verticalScale(16)}px;
 `;
 
 export const CarDetails = styled.View`
-  padding: 24px;
+  padding: ${verticalScale(24)} ${horizontalScale(24)}px;
   flex-direction: row;
   justify-content: space-between;
 `;
 
 export const CarImage = styled.Image`
-  height: 92px;
-  width: 160px;
+  height: ${verticalScale(92)}px;
+  width: ${horizontalScale(160)}px;
   object-fit: contain;
 `;
 
@@ -30,13 +31,13 @@ export const CarName = styled.Text`
   color: ${(props) => props.theme.COLORS["gray-700"]};
   font-family: ${(props) => props.theme.FONT_FAMILY["archivo-medium"]};
   font-size: ${(props) => props.theme.FONT_SIZE.sm}px;
-  margin-bottom: 16px;
+  margin-bottom: ${verticalScale(16)}px;
 `;
 export const Infos = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 25px;
+  gap: ${verticalScale(25)}px;
 `;
 
 export const Period = styled.Text`

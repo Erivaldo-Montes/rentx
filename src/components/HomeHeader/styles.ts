@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { horizontalScale, verticalScale } from "@/utils/metrics";
 
 export const Container = styled.View`
   flex-direction: row;
@@ -6,7 +7,8 @@ export const Container = styled.View`
   align-items: center;
 
   width: 100%;
-  padding: 39px 16px 32px 16px;
+  padding: ${verticalScale(39)}px ${horizontalScale(16)}px
+    ${verticalScale(32)}px ${horizontalScale(16)}px;
   background: ${(props) => props.theme.COLORS["gray-900"]};
 `;
 

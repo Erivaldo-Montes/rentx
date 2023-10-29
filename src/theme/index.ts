@@ -1,3 +1,11 @@
+import { PixelRatio } from "react-native";
+
+const fontScale = PixelRatio.getFontScale();
+
+function getFontSize(size: number) {
+  return size / fontScale;
+}
+
 export const theme = {
   COLORS: {
     "gray-100": "#F4F5F6",
@@ -8,6 +16,7 @@ export const theme = {
     "gray-800": "#29292E",
     "gray-900": "#1B1B1F",
 
+    "red-100": "#FDEDEF",
     "red-600": "#DC1637",
 
     "green-600": "#03B252",
@@ -23,14 +32,16 @@ export const theme = {
     "archivo-medium": "Archivo_500Medium",
   },
   FONT_SIZE: {
-    "4XL": 40,
-    "3XL": 30,
-    xl: 20,
-    sm: 15,
-    xs: 12,
-    xss: 10,
+    "4XL": getFontSize(40),
+    "3XL": getFontSize(30),
+    base: getFontSize(25),
+    xl: getFontSize(20),
+    sm: getFontSize(15),
+    xs: getFontSize(12),
+    xss: getFontSize(10),
   },
   LINE_HEIGH: {
     "leading-6": 25,
+    "leading-7": 30,
   },
 };

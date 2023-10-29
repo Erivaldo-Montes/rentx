@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import { horizontalScale, verticalScale } from "@/utils/metrics";
 export const Container = styled.View`
   flex: 1;
   background: ${(props) => props.theme.COLORS["gray-900"]};
@@ -7,7 +8,7 @@ export const Container = styled.View`
 `;
 
 export const ImageView = styled.View`
-  margin-top: ${getStatusBarHeight() + 66}px;
+  margin-top: ${getStatusBarHeight() + verticalScale(66)}px;
 `;
 
 export const Title = styled.Text`
@@ -15,19 +16,19 @@ export const Title = styled.Text`
   font-size: ${(props) => props.theme.FONT_SIZE["3XL"]}px;
   color: ${(props) => props.theme.COLORS["gray-200"]};
 
-  margin-top: 46px;
+  margin-top: ${verticalScale(46)}px;
 `;
 
 export const SuccessIconView = styled.View`
-  width: 80px;
-  height: 80px;
-  margin-top: 46px;
+  width: ${horizontalScale(80)}px;
+  height: ${verticalScale(80)}px;
+  margin-top: ${verticalScale(46)}px;
 `;
 
 export const ButtonSubmit = styled.TouchableOpacity`
-  width: 80px;
-  height: 56px;
-  margin-top: 105px;
+  width: ${horizontalScale(80)}px;
+  height: ${verticalScale(56)}px;
+  margin-top: ${verticalScale(105)}px;
   background-color: ${(props) => props.theme.COLORS["gray-800"]};
   align-items: center;
   justify-content: center;
@@ -46,5 +47,5 @@ export const Message = styled.Text`
   color: ${(props) => props.theme.COLORS["gray-400"]};
   text-align: center;
 
-  margin-top: 25px;
+  margin-top: ${verticalScale(25)}px;
 `;

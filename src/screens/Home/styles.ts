@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { horizontalScale } from "@/utils/metrics";
 
 export const Container = styled.View`
   flex: 1;
@@ -6,5 +7,5 @@ export const Container = styled.View`
 `;
 
 export const CardsList = styled.View`
-  padding: 0 16px;
+  padding: 0 ${horizontalScale(16)}px;
 `;

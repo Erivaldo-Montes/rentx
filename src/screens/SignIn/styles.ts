@@ -1,7 +1,9 @@
 import styled from "styled-components/native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import { horizontalScale, verticalScale } from "@/utils/metrics";
+
 export const Container = styled.View`
-  padding: 0 24px;
+  padding: 0 ${horizontalScale(24)}px;
   background-color: ${(props) => props.theme.COLORS["gray-100"]};
 `;
 
@@ -10,7 +12,7 @@ export const Title = styled.Text`
   font-family: ${(props) => props.theme.FONT_FAMILY["archivo-semiBold"]};
   color: ${(props) => props.theme.COLORS["gray-900"]};
   padding: 8px;
-  margin-top: ${getStatusBarHeight() + 100}px;
+  margin-top: ${getStatusBarHeight() + verticalScale(100)}px;
 `;
 
 export const Subtitle = styled.Text`
@@ -18,13 +20,13 @@ export const Subtitle = styled.Text`
   font-family: ${(props) => props.theme.FONT_FAMILY["inter-regular"]};
   color: ${(props) => props.theme.COLORS["gray-500"]};
   line-height: ${(props) => props.theme.LINE_HEIGH["leading-6"]}px;
-  padding: 8px;
-  margin-bottom: 64px;
+  padding: ${verticalScale(8)}px ${horizontalScale(8)}px;
+  margin-bottom: ${verticalScale(64)};
 `;
 
 export const Form = styled.View`
-  margin-bottom: 64px;
-  gap: 8px;
+  margin-bottom: ${verticalScale(64)}px;
+  gap: ${verticalScale(8)}px;
 `;
 
 export const Buttons = styled.View`
@@ -33,7 +35,7 @@ export const Buttons = styled.View`
 
 export const Header = styled.View`
   margin-top: ${getStatusBarHeight() + 18}px;
-  margin-bottom: 60px;
+  margin-bottom: ${verticalScale(60)}px;
   width: 100%;
 `;
 

@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import { horizontalScale, verticalScale } from "@/utils/metrics";
 
 export const Container = styled.View`
   flex: 1;
@@ -8,7 +9,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   background-color: ${(props) => props.theme.COLORS["gray-900"]};
-  padding: 25px;
+  padding: ${verticalScale(25)}px ${horizontalScale(25)}px;
 `;
 
 export const BackButtonHeader = styled.View`
@@ -23,7 +24,7 @@ export const Title = styled.Text`
   font-size: ${(props) => props.theme.FONT_SIZE["3XL"]}px;
   color: ${(props) => props.theme.COLORS.white};
   line-height: ${(props) => props.theme.LINE_HEIGH["leading-7"]}px;
-  margin-top: 24px;
+  margin-top: ${verticalScale(24)}px;
 `;
 
 export const Period = styled.View`
@@ -45,7 +46,7 @@ export const PeriodRentInput = styled.TextInput.attrs(() => ({
   font-size: ${(props) => props.theme.FONT_SIZE.sm}px;
   color: ${(props) => props.theme.COLORS.white};
 
-  width: 104px;
+  width: ${horizontalScale(104)}px;
   padding: 2px;
 
   border-bottom-width: 1px;
@@ -61,10 +62,10 @@ export const EndRentText = styled.Text`
 `;
 
 export const CalendarContainer = styled.View`
-  margin-top: 33px;
+  margin-top: ${verticalScale(33)}px;
 `;
 
 export const ButtonContainer = styled.View`
   margin-top: auto;
-  padding: 24px;
+  padding: ${verticalScale(24)}px ${horizontalScale(24)}px;
 `;

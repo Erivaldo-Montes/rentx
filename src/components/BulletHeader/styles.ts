@@ -1,5 +1,10 @@
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import styled from "styled-components/native";
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from "@/utils/getResponsiveSize";
 
 interface BulletProps {
   isActive: boolean;
@@ -7,9 +12,9 @@ interface BulletProps {
 
 export const Container = styled.View`
   margin-top: ${getStatusBarHeight() + 18}px;
-  margin-bottom: 60px;
   width: 100%;
-  padding: 0 24px;
+  margin-bottom: ${verticalScale(30)}px;
+  padding: 0 ${horizontalScale(24)}px;
 
   justify-content: space-between;
   align-items: center;
@@ -22,10 +27,10 @@ export const StepVisualization = styled.View`
 `;
 
 export const Bullet = styled.View<BulletProps>`
-  height: 6px;
-  width: 6px;
+  height: ${verticalScale(6)}px;
+  width: ${horizontalScale(6)}px;
 
-  border-radius: 999px;
+  border-radius: ${moderateScale(999)}px;
 
   background: ${(props) =>
     props.isActive

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-
+import { horizontalScale, verticalScale } from "@/utils/metrics";
 interface Props {
   isFocused: boolean;
   isError: boolean;
@@ -7,7 +7,7 @@ interface Props {
 
 export const Container = styled.View<Props>`
   width: 100%;
-  height: 56px;
+  height: ${verticalScale(56)}px;
   flex-direction: row;
   border-width: 2px;
   border-color: transparent;
@@ -30,7 +30,7 @@ export const Container = styled.View<Props>`
 export const IconContainer = styled.View`
   background-color: ${(props) => props.theme.COLORS.white};
   height: 100%;
-  width: 56px;
+  width: ${horizontalScale(56)}px;
   align-items: center;
   justify-content: center;
 `;
@@ -38,7 +38,7 @@ export const IconContainer = styled.View`
 export const InputText = styled.TextInput`
   flex: 1;
   background-color: ${(props) => props.theme.COLORS.white};
-  padding: 0 23px;
+  padding: 0 ${horizontalScale(23)}px;
   margin-left: 2px;
   font-family: ${(props) => props.theme.FONT_FAMILY["inter-regular"]};
   font-size: ${(props) => props.theme.FONT_SIZE.sm}px;

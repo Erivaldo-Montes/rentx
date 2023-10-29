@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { horizontalScale, verticalScale } from "@/utils/metrics";
 
 export const Container = styled.View`
   flex: 1;
@@ -11,8 +12,8 @@ export const Header = styled.View`
 
 export const BodyContent = styled.View`
   flex: 1;
-  padding: 0 16px;
-  margin-top: 35px;
+  padding: 0 ${horizontalScale(16)}px;
+  margin-top: ${verticalScale(35)}px;
 `;
 
 export const Detail = styled.View`
@@ -54,6 +55,7 @@ export const Price = styled.Text`
 
 export const Accessories = styled.View`
   flex-direction: row;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
@@ -64,7 +66,7 @@ export const About = styled.Text`
   color: ${(props) => props.theme.COLORS["gray-700"]};
   font-family: ${(props) => props.theme.FONT_FAMILY["inter-regular"]};
   line-height: ${(props) => props.theme.LINE_HEIGH["leading-6"]}px;
-  margin-top: 24px;
+  margin-top: ${verticalScale(24)}px;
   text-align: justify;
 `;
 
@@ -72,5 +74,5 @@ export const ButtonContainer = styled.View`
   background-color: ${(props) => props.theme.COLORS["gray-100"]};
   bottom: 0;
   width: 100%;
-  padding: 24px;
+  padding: ${verticalScale(24)}px ${horizontalScale(24)}px;
 `;
