@@ -6,9 +6,11 @@ declare namespace ReactNavigation {
     ConfirmScreen: {
       title: string;
       message: string;
-      nextScreenRoute: "signIn";
+      nextScreenRoute: "SignIn" | "Home";
     };
     Home: undefined;
     CarDetails: { carId: string };
+    Scheduling: undefined;
+    ResumeRent: undefined;
   }
 }
