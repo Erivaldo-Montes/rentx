@@ -7,6 +7,7 @@ import {
   SuccessIconView,
   ButtonSubmit,
   ButtonText,
+  Message,
 } from "./style";
 import LottieView from "lottie-react-native";
 import { useTheme } from "styled-components/native";
@@ -80,6 +81,7 @@ export function ConfirmScreen() {
         />
       </SuccessIconView>
       <Title>{title}</Title>
+      <Message>{message}</Message>
       <ButtonSubmit onPress={handleSuccess}>
         <ButtonText>ok</ButtonText>
       </ButtonSubmit>

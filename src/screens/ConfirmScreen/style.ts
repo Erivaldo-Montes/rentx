@@ -38,3 +38,13 @@ export const ButtonText = styled.Text`
   font-size: ${(props) => props.theme.FONT_SIZE.sm}px;
   color: ${(props) => props.theme.COLORS.white};
 `;
+
+export const Message = styled.Text`
+  font-family: ${(props) => props.theme.FONT_FAMILY["inter-regular"]};
+  font-size: ${(props) => props.theme.FONT_SIZE.sm}px;
+  line-height: ${(props) => props.theme.LINE_HEIGH["leading-6"]}px;
+  color: ${(props) => props.theme.COLORS["gray-400"]};
+  text-align: center;
+
+  margin-top: 25px;
+`;
