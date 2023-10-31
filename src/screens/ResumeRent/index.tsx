@@ -36,9 +36,12 @@ import { useTheme } from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
 import { StatusBar } from "react-native";
 import { Button } from "@/components/Button";
+import { format } from "date-fns";
+import { getPlatformDate } from "@/utils/getPlateformDate";
 
 type Params = {
   carId: string;
+  markedDates: string[];
 };
 
 type BulletProps = {
@@ -50,15 +53,22 @@ export function ResumeRent() {
   const [car, setCar] = useState<CarDto>({} as CarDto);
   const [bullets, setBullets] = useState<BulletProps>();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [rentDate, setRentDate] = useState<{ start: string; end: string }>();
   const theme = useTheme();
 
   const navigation = useNavigation();
 
   const route = useRoute();
-  // const { carId } = route.params as Params;
+  const { carId, markedDates } = route.params as Params;
 
   function handleRentNow() {
+    axios.post("/rentals", {
+      user_id: "1",
+      car_id: carId,
+      start_date: new Date(markedDates[0]),
+      end_date: new Date(markedDates[markedDates.length - 1]),
+      total: markedDates.length * car.rent.price,
+    });
     navigation.navigate("ConfirmScreen", {
       message: `Agora você só precisa ir${"\n"} até a concessionária da RENTX`,
       nextScreenRoute: "Home",
@@ -77,9 +87,7 @@ export function ResumeRent() {
   async function fetchCarInfo() {
     try {
       setIsLoading(true);
-      const response = await axios.get(
-        `/cars/535e8de8-721b-4bac-8b72-7d29be7da467`
-      );
+      const response = await axios.get(`/cars/${carId}`);
 
       setCar(response.data);
     } catch (error) {
@@ -91,6 +99,20 @@ export function ResumeRent() {
 
   useEffect(() => {
     fetchCarInfo();
+    setRentDate(() => {
+      let end = format(
+        getPlatformDate(new Date(markedDates[markedDates.length - 1])),
+        "dd/MM/yyyy"
+      );
+      let start = format(
+        getPlatformDate(new Date(markedDates[0])),
+        "dd/MM/yyyy"
+      );
+      return {
+        end,
+        start,
+      };
+    });
   }, []);
 
   useEffect(() => {
@@ -156,7 +178,7 @@ export function ResumeRent() {
                 </CalendarIcon>
                 <DateContainer>
                   <DateText>DE</DateText>
-                  <DatePeriod>12/12/2242</DatePeriod>
+                  <DatePeriod>{rentDate?.start}</DatePeriod>
                 </DateContainer>
                 <Feather
                   name="chevron-right"
@@ -165,14 +187,16 @@ export function ResumeRent() {
                 />
                 <DateContainer>
                   <DateText>ATÈ</DateText>
-                  <DatePeriod>12/12/2242</DatePeriod>
+                  <DatePeriod>{rentDate?.end}</DatePeriod>
                 </DateContainer>
               </PeriodToRent>
               <Invoice>
                 <InvoiceText>total</InvoiceText>
                 <InvoiceContainer>
-                  <RentalDaily>R$343.23 x 23</RentalDaily>
-                  <Total>R$ 23332.34</Total>
+                  <RentalDaily>
+                    R${car.rent.price} x {markedDates.length} diárias
+                  </RentalDaily>
+                  <Total>R$ {car.rent.price * markedDates.length}</Total>
                 </InvoiceContainer>
               </Invoice>
             </RendDetails>
