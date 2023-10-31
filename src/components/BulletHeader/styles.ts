@@ -1,10 +1,6 @@
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import styled from "styled-components/native";
-import {
-  horizontalScale,
-  moderateScale,
-  verticalScale,
-} from "@/utils/getResponsiveSize";
+import { horizontalScale, moderateScale, verticalScale } from "@/utils/metrics";
 
 interface BulletProps {
   isActive: boolean;

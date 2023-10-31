@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components/native";
 import { TouchableOpacityProps } from "react-native";
-import { verticalScale } from "@/utils/getResponsiveSize";
+import { verticalScale } from "@/utils/metrics";
 
 interface Props extends TouchableOpacityProps {
   styleButton: "WHITE" | "GREEN" | "RED";

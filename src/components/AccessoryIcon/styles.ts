@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { horizontalScale, verticalScale } from "@/utils/getResponsiveSize";
+import { horizontalScale, verticalScale } from "@/utils/metrics";
 
 export const Container = styled.View`
   width: ${horizontalScale(109)}px;
