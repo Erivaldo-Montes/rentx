@@ -11,12 +11,11 @@ import { Button } from "@/components/Button";
 import * as NavigationBar from "expo-navigation-bar";
 import { format } from "date-fns";
 import { useNavigation, useRoute } from "@react-navigation/native";
-
+import { BackButton } from "@/components/BackButton";
 import {
   Container,
   BackButtonHeader,
   Header,
-  BackButton,
   Title,
   Period,
   StartRent,
@@ -104,13 +103,7 @@ export function Scheduling() {
       />
       <Header>
         <BackButtonHeader>
-          <BackButton onPress={handleBack}>
-            <MaterialIcons
-              name="chevron-left"
-              color={theme.COLORS.white}
-              size={24}
-            />
-          </BackButton>
+          <BackButton color={theme.COLORS.white} onPress={handleBack} />
         </BackButtonHeader>
         <Title>
           Escolha uma{"\n"}data de início e {"\n"}fim do aluguel

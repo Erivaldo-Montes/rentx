@@ -10,7 +10,6 @@ export const Container = styled.View`
   margin-top: ${getStatusBarHeight() + 18}px;
   width: 100%;
   margin-bottom: ${verticalScale(30)}px;
-  padding: 0 ${horizontalScale(24)}px;
 
   justify-content: space-between;
   align-items: center;

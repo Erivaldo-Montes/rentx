@@ -1,8 +1,7 @@
-import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "styled-components/native";
 import { Container, StepVisualization, Bullet } from "./styles";
+import { BackButton } from "@/components/BackButton";
 
 interface Props {
   bulletActive: number;
@@ -32,13 +31,7 @@ export function BulletHeader({ bulletsNumber, bulletActive }: Props) {
   const theme = useTheme();
   return (
     <Container>
-      <TouchableOpacity onPress={handleBack}>
-        <MaterialIcons
-          name="chevron-left"
-          size={24}
-          color={theme.COLORS["gray-500"]}
-        />
-      </TouchableOpacity>
+      <BackButton color={theme.COLORS["gray-500"]} onPress={handleBack} />
       <StepVisualization>
         {activeBullet.map((bullet, index) => (
           <Bullet isActive={bullet} key={index} />

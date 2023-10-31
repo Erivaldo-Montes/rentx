@@ -17,8 +17,6 @@ export const BackButtonHeader = styled.View`
   width: 100%;
 `;
 
-export const BackButton = styled.TouchableOpacity``;
-
 export const Title = styled.Text`
   font-family: ${(props) => props.theme.FONT_FAMILY["archivo-semiBold"]};
   font-size: ${(props) => props.theme.FONT_SIZE["3XL"]}px;

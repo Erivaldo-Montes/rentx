@@ -26,6 +26,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { useTheme } from "styled-components/native";
 import { useAuth } from "@/hooks/auth";
+import { BackButton } from "@/components/BackButton";
 
 const SignInSchema = yup.object({
   email: yup
@@ -120,13 +121,10 @@ export function SignIn() {
             </Animated.View>
           ) : (
             <Header>
-              <TouchableOpacity onPress={hideKeyboard}>
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={theme.COLORS["gray-500"]}
-                />
-              </TouchableOpacity>
+              <BackButton
+                onPress={hideKeyboard}
+                color={theme.COLORS["gray-500"]}
+              />
             </Header>
           )}
 
