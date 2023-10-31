@@ -1,6 +1,5 @@
 import { eachDayOfInterval, isEqual, format, addDays } from "date-fns";
 import { theme } from "@/theme/index";
-import { useState } from "react";
 import { MarkedDateProps, DayProps } from "./index";
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
   endDate: DayProps;
 }
 
-export function getInterval({ startDate, endDate }: Props) {
+export function getInterval({ startDate, endDate }: Props): MarkedDateProps {
   const dataFnsInterval = eachDayOfInterval({
     start: new Date(startDate.timestamp),
     end: new Date(endDate.timestamp),
