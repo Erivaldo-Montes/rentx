@@ -21,7 +21,7 @@ export const Subtitle = styled.Text`
   color: ${(props) => props.theme.COLORS["gray-500"]};
   line-height: ${(props) => props.theme.LINE_HEIGH["leading-6"]}px;
   padding: ${verticalScale(8)}px ${horizontalScale(8)}px;
-  margin-bottom: ${verticalScale(64)};
+  margin-bottom: ${verticalScale(64)}px;
 `;
 
 export const Form = styled.View`
