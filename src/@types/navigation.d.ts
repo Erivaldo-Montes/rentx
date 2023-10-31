@@ -10,7 +10,7 @@ declare namespace ReactNavigation {
     };
     Home: undefined;
     CarDetails: { carId: string };
-    Scheduling: undefined;
-    ResumeRent: undefined;
+    Scheduling: { carId: string };
+    ResumeRent: { carId: string; markedDates: string[] };
   }
 }
