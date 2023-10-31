@@ -4,6 +4,7 @@ import Toast from "react-native-toast-message";
 import { theme } from "./src/theme";
 import { useFonts } from "expo-font";
 import { Routes } from "./src/routes";
+import { AppProvider } from "@/contexts/index";
 
 import {
   Archivo_700Bold,
@@ -36,9 +37,9 @@ export default function App() {
         backgroundColor={"transparent"}
         translucent
       />
-
-      <Routes />
-
+      <AppProvider>
+        <Routes />
+      </AppProvider>
       <Toast />
     </ThemeProvider>
   );
