@@ -44,7 +44,7 @@ export function SignUpSecondStep() {
     navigation.navigate("ConfirmScreen", {
       title: "Conta criada",
       message: "",
-      nextScreenRoute: "signIn",
+      nextScreenRoute: "SignIn",
     });
   }
 
