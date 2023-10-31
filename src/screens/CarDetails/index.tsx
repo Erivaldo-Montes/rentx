@@ -73,7 +73,7 @@ export function CarDetails() {
 
   async function handleRentPeriod() {
     try {
-      await navigation.navigate("Scheduling");
+      navigation.navigate("Scheduling", { carId });
     } catch (error) {
       console.log(error);
     }
