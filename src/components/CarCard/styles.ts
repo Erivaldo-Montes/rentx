@@ -7,7 +7,7 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const CarDetails = styled.View`
-  padding: ${verticalScale(24)} ${horizontalScale(24)}px;
+  padding: ${verticalScale(24)}px ${horizontalScale(24)}px;
   flex-direction: row;
   justify-content: space-between;
 `;
