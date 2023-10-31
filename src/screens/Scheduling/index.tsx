@@ -10,7 +10,8 @@ import { StatusBar } from "react-native";
 import { Button } from "@/components/Button";
 import * as NavigationBar from "expo-navigation-bar";
 import { format } from "date-fns";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import {
   Container,
   BackButtonHeader,
@@ -32,6 +33,10 @@ type DayPress = {
   endDate: String;
 };
 
+type Params = {
+  carId: string;
+};
+
 export function Scheduling() {
   const theme = useTheme();
   const [date, setDate] = useState<DayPress>({
@@ -39,16 +44,24 @@ export function Scheduling() {
     startDate: "",
   });
   const [lastSelected, setLastSelected] = useState<DayProps>();
-  const [markedDate, setMarkedDate] = useState<MarkedDateProps>();
+  const [markedDate, setMarkedDate] = useState<MarkedDateProps>(
+    {} as MarkedDateProps
+  );
 
   const navigation = useNavigation();
+
+  const route = useRoute();
+  const { carId } = route.params as Params;
 
   function handleBack() {
     navigation.goBack();
   }
 
   function handleConfirm() {
-    navigation.navigate("ResumeRent");
+    navigation.navigate("ResumeRent", {
+      carId,
+      markedDates: Object.keys(markedDate),
+    });
   }
 
   function handleDayPress(day: DayProps) {
