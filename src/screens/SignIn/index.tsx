@@ -25,6 +25,7 @@ import {
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { useTheme } from "styled-components/native";
+import { useAuth } from "@/hooks/auth";
 
 const SignInSchema = yup.object({
   email: yup
@@ -41,6 +42,8 @@ export function SignIn() {
   const [inputsIsEmpty, setInputIsEmpty] = useState(false);
   const [isFormError, setIsFormError] = useState(false);
 
+  const { SignIn } = useAuth();
+
   const {
     control,
     watch,
@@ -48,11 +51,18 @@ export function SignIn() {
     formState: { errors },
   } = useForm<SignInData>({
     resolver: yupResolver(SignInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
+
   const theme = useTheme();
   const navigation = useNavigation();
 
-  function handleLogin(data: SignInData) {}
+  function handleLogin(data: SignInData) {
+    SignIn(data);
+  }
 
   function hideKeyboard() {
     Keyboard.dismiss();
