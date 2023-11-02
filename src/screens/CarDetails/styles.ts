@@ -7,7 +7,7 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  overflow: hidden;
+  padding: 0 ${horizontalScale(16)}px;
 `;
 
 export const BodyContent = styled.View`

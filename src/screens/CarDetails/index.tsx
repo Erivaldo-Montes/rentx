@@ -123,11 +123,11 @@ export function CarDetails() {
                   bulletActive={bullets?.activeBullets!}
                   bulletsNumber={bullets?.bulletsNumber!}
                 />
-                <ImageSlider
-                  imagesUrl={car?.photos}
-                  onBulletUpdate={HeaderBulletUpdate}
-                />
               </Header>
+              <ImageSlider
+                imagesUrl={car?.photos}
+                onBulletUpdate={HeaderBulletUpdate}
+              />
             </Animated.View>
             <BodyContent>
               <Detail>
@@ -157,7 +157,7 @@ export function CarDetails() {
           <ButtonContainer>
             <Button
               title="Escolher o período do aluguel"
-              styleButtom="RED"
+              styleButton="RED"
               onPress={handleRentPeriod}
             />
           </ButtonContainer>
