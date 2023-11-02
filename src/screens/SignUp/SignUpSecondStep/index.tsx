@@ -18,7 +18,6 @@ const confirmPasswordSchema = yup.object({
   confirmPassword: yup
     .string()
     .required("Insira a confirmação da senha")
-
     .oneOf([yup.ref("password")], "As senhas não são iguais"),
 });
 
@@ -54,9 +53,6 @@ export function SignUpSecondStep() {
   useEffect(() => {
     setIsDisableButton(() => {
       if (!watchConfirmPassword || !watchPassword) {
-        return true;
-      }
-      if (errors.confirmPassword?.message || errors.password?.message) {
         return true;
       } else {
         return false;
