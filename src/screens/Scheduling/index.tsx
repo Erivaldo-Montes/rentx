@@ -129,7 +129,7 @@ export function Scheduling() {
       <ButtonContainer>
         <Button
           title="Confirmar"
-          styleButtom="RED"
+          styleButton="RED"
           disabled={date.startDate === ""}
           onPress={handleConfirm}
         />

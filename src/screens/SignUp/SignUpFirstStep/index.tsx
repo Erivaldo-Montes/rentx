@@ -191,7 +191,7 @@ export function SignUpFirstStep() {
             />
           </Form>
           <Button
-            styleButtom="RED"
+            styleButton="RED"
             title="Proxímo"
             disabled={inputsIsEmpty || isFormError}
             onPress={handleSubmit(handleSignFirstStepSubmit)}

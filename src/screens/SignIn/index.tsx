@@ -182,14 +182,14 @@ export function SignIn() {
 
           <Buttons>
             <Button
-              styleButtom="RED"
+              styleButton="RED"
               title="Login"
               onPress={handleSubmit(handleLogin)}
               disabled={isFormError || inputsIsEmpty}
             />
             {!keyboardShow && (
               <Button
-                styleButtom="WHITE"
+                styleButton="WHITE"
                 title="Criar conta gratuita"
                 onPress={() => navigation.navigate("SignUpFirstStep")}
               />

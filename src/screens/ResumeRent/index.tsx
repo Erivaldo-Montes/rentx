@@ -203,7 +203,7 @@ export function ResumeRent() {
           </BodyContent>
           <ButtonContainer>
             <Button
-              styleButtom="GREEN"
+              styleButton="GREEN"
               title="Alugar agora"
               onPress={handleRentNow}
             />

@@ -120,7 +120,7 @@ export function SignUpSecondStep() {
         />
       </Form>
       <Button
-        styleButtom="GREEN"
+        styleButton="GREEN"
         title="Cadastrar"
         disabled={isDisableButton}
         onPress={handleSubmit(handleRegister)}
