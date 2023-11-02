@@ -2,7 +2,7 @@ import { Container, CardsList } from "./styles";
 import { HomeHeader } from "@/components/HomeHeader";
 import { FlatList, StatusBar } from "react-native";
 import { CarCard } from "@/components/CarCard";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { CarDto } from "@/DTOs/Car";
 import { axios } from "@/services/api";
 import { useFocusEffect } from "@react-navigation/native";
@@ -19,18 +19,22 @@ export function Home() {
     }
   }
 
-  useFocusEffect(() => {
-    fetchCars();
-  });
+  useFocusEffect(
+    useCallback(() => {
+      fetchCars();
+    }, [])
+  );
 
-  useFocusEffect(() => {
-    async function navBar() {
-      await NavigationBar.setBackgroundColorAsync("#f4f5f6");
-      await NavigationBar.setButtonStyleAsync("dark");
-    }
+  useFocusEffect(
+    useCallback(() => {
+      async function navBar() {
+        await NavigationBar.setBackgroundColorAsync("#f4f5f6");
+        await NavigationBar.setButtonStyleAsync("dark");
+      }
 
-    navBar();
-  });
+      navBar();
+    }, [])
+  );
 
   return (
     <Container>
