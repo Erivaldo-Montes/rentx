@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacityProps } from "react-native";
 import { verticalScale } from "@/utils/metrics";
 
-interface Props extends TouchableOpacityProps {
+interface Props {
   styleButton: "WHITE" | "GREEN" | "RED";
+  disabled?: boolean;
 }
 
 export const Container = styled.TouchableOpacity<Props>`
