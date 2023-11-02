@@ -12,5 +12,6 @@ declare namespace ReactNavigation {
     CarDetails: { carId: string };
     Scheduling: { carId: string };
     ResumeRent: { carId: string; markedDates: string[] };
+    Profile: undefined;
   }
 }
