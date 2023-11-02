@@ -24,12 +24,13 @@ export const theme = {
     white: "#fff",
   },
   FONT_FAMILY: {
-    "archivo-bold": "Archivo_700Bold",
+    "archivo-medium": "Archivo_500Medium",
     "archivo-semiBold": "Archivo_600SemiBold",
+    "archivo-regular": "Archivo_400Regular",
+    "archivo-bold": "Archivo_700Bold",
     "inter-regular": "Inter_400Regular",
     "inter-bold": "Inter_700Bold",
     "inter-medium": "Inter_500Medium",
-    "archivo-medium": "Archivo_500Medium",
   },
   FONT_SIZE: {
     "4XL": getFontSize(40),
