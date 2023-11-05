@@ -22,6 +22,7 @@ export function AppRoute() {
         tabBarShowLabel: false,
         tabBarActiveTintColor: theme.COLORS["red-600"],
         tabBarInactiveTintColor: theme.COLORS["gray-400"],
+        tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: theme.COLORS["gray-100"],
           borderTopWidth: 0,

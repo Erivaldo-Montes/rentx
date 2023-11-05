@@ -38,7 +38,8 @@
     "react-native-toast-message": "^2.1.6",
     "styled-components": "^6.1.0",
     "yup": "^1.3.2",
-    "expo-system-ui": "~2.4.0"
+    "expo-system-ui": "~2.4.0",
+    "expo-image-picker": "~14.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -5,8 +5,10 @@ type AuthProviderProps = {
 };
 
 interface CarContextData {
-  SignIn: ({ email, password }: SignInProps) => void;
   user: string | undefined;
+  signIn: ({ email, password }: SignInProps) => void;
+
+  signOut: () => void;
 }
 
 type SignInProps = {
@@ -18,14 +20,18 @@ export const AuthContext = createContext<CarContextData>({} as CarContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<string>();
-  async function SignIn({ email, password }: SignInProps) {
+  async function signIn({ email, password }: SignInProps) {
     setUser(email);
   }
 
+  async function signOut() {
+    setUser("");
+  }
   return (
     <AuthContext.Provider
       value={{
-        SignIn,
+        signIn,
+        signOut,
         user,
       }}
     >

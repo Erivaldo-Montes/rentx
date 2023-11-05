@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   Keyboard,
   TouchableOpacity,
@@ -9,9 +9,8 @@ import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { MaterialIcons } from "@expo/vector-icons";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
 import {
   Container,
@@ -23,6 +22,7 @@ import {
   ErrorMessageText,
 } from "./styles";
 import { Input } from "../../components/Input";
+import { InputPassword } from "@/components/InputPassword";
 import { Button } from "../../components/Button";
 import { useTheme } from "styled-components/native";
 import { useAuth } from "@/hooks/auth";
@@ -43,7 +43,7 @@ export function SignIn() {
   const [inputsIsEmpty, setInputIsEmpty] = useState(false);
   const [isFormError, setIsFormError] = useState(false);
 
-  const { SignIn } = useAuth();
+  const { signIn } = useAuth();
 
   const {
     control,
@@ -62,7 +62,7 @@ export function SignIn() {
   const navigation = useNavigation();
 
   function handleLogin(data: SignInData) {
-    SignIn(data);
+    signIn(data);
   }
 
   function hideKeyboard() {
@@ -95,14 +95,17 @@ export function SignIn() {
     });
   }, [watchAll, errors]);
 
-  useEffect(() => {
-    async function navBar() {
-      await NavigationBar.setBackgroundColorAsync("#f4f5f6");
-      await NavigationBar.setButtonStyleAsync("dark");
-    }
+  console.log("render");
+  useFocusEffect(
+    useCallback(() => {
+      async function navBar() {
+        await NavigationBar.setBackgroundColorAsync("#f4f5f6");
+        await NavigationBar.setButtonStyleAsync("dark");
+      }
 
-    navBar();
-  }, []);
+      navBar();
+    }, [])
+  );
 
   return (
     <KeyboardAvoidingView
@@ -159,12 +162,10 @@ export function SignIn() {
               name="password"
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  icon="lock"
+                <InputPassword
                   placeholder="Senha"
                   autoCorrect={false}
                   autoCapitalize="none"
-                  inputType="password"
                   errorMessage={errors.email?.message}
                   onChangeText={onChange}
                   value={value}

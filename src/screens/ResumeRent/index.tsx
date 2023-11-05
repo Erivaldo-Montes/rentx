@@ -139,11 +139,11 @@ export function ResumeRent() {
               bulletActive={bullets?.activeBullets!}
               bulletsNumber={bullets?.bulletsNumber!}
             />
-            <ImageSlider
-              imagesUrl={car?.photos}
-              onBulletUpdate={HeaderBulletUpdate}
-            />
           </Header>
+          <ImageSlider
+            imagesUrl={car?.photos}
+            onBulletUpdate={HeaderBulletUpdate}
+          />
 
           <BodyContent>
             <Detail>

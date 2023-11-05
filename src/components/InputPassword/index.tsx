@@ -8,17 +8,17 @@ import { useTheme } from "styled-components/native";
 
 interface Props extends TextInputProps {
   // captura o nomes do icones
-  icon: React.ComponentProps<typeof Feather>["name"];
+  inputType?: "password" | "text";
   errorMessage?: string | null;
 }
 
-export function Input({
-  icon,
+export function InputPassword({
   errorMessage = null,
   onChangeText,
   ...rest
 }: Props) {
   const [inputContent, setInputContent] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const theme = useTheme();
 
@@ -30,11 +30,15 @@ export function Input({
     setIsFocused(false);
   }
 
+  function handleShowPassword() {
+    setShowPassword((state) => !state);
+  }
+
   return (
     <Container isFocused={isFocused} isError={!!errorMessage}>
       <IconContainer>
         <Feather
-          name={icon}
+          name={"lock"}
           size={24}
           color={
             inputContent ? theme.COLORS["red-600"] : theme.COLORS["gray-500"]
@@ -44,7 +48,8 @@ export function Input({
       <InputText
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
-        onChangeText={(e) => {
+        secureTextEntry={!showPassword}
+        onChangeText={(e: any) => {
           if (onChangeText) {
             onChangeText(e);
           }
@@ -52,6 +57,26 @@ export function Input({
         }}
         {...rest}
       />
+
+      {showPassword ? (
+        <IconContainer>
+          <Feather
+            name={"eye-off"}
+            size={24}
+            color={theme.COLORS["gray-500"]}
+            onPress={handleShowPassword}
+          />
+        </IconContainer>
+      ) : (
+        <IconContainer>
+          <Feather
+            name={"eye"}
+            size={24}
+            color={theme.COLORS["gray-500"]}
+            onPress={handleShowPassword}
+          />
+        </IconContainer>
+      )}
     </Container>
   );
 }

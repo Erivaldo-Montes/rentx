@@ -6,9 +6,10 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useNavigation } from "@react-navigation/native";
 import { BulletHeader } from "@/components/BulletHeader";
 import * as NavigationBar from "expo-navigation-bar";
-import { Input } from "@/components/Input";
+import { InputPassword } from "@/components/InputPassword";
 import { Button } from "@/components/Button";
 import { Container, Form, FormTitle, ErrorMessageText } from "./styles";
+import { TouchableWithoutFeedback, Keyboard } from "react-native";
 
 const confirmPasswordSchema = yup.object({
   password: yup
@@ -70,57 +71,62 @@ export function SignUpSecondStep() {
   }, []);
 
   return (
-    <Container>
-      <BulletHeader bulletActive={2} bulletsNumber={2} />
-      <Form>
-        <FormTitle>02. Senha</FormTitle>
-        <Controller
-          name="password"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              icon="lock"
-              inputType="password"
-              placeholder="Senha"
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
+    <TouchableWithoutFeedback
+      onPress={() => Keyboard.dismiss()}
+      style={{ flex: 1 }}
+    >
+      <Container>
+        <BulletHeader bulletActive={2} bulletsNumber={2} />
+        <Form>
+          <FormTitle>02. Senha</FormTitle>
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <InputPassword
+                placeholder="Senha"
+                onChangeText={onChange}
+                autoCorrect={false}
+                autoCapitalize="none"
+                value={value}
+              />
+            )}
+          />
+          <ErrorMessage
+            name="password"
+            errors={errors}
+            render={({ message }) => (
+              <ErrorMessageText>{message}</ErrorMessageText>
+            )}
+          />
+          <Controller
+            name="confirmPassword"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <InputPassword
+                placeholder="Repetir senha"
+                onChangeText={onChange}
+                autoCorrect={false}
+                autoCapitalize="none"
+                value={value}
+              />
+            )}
+          />
+          <ErrorMessage
+            name="confirmPassword"
+            errors={errors}
+            render={({ message }) => (
+              <ErrorMessageText>{message}</ErrorMessageText>
+            )}
+          />
+        </Form>
+        <Button
+          styleButton="GREEN"
+          title="Cadastrar"
+          disabled={isDisableButton}
+          onPress={handleSubmit(handleRegister)}
         />
-        <ErrorMessage
-          name="password"
-          errors={errors}
-          render={({ message }) => (
-            <ErrorMessageText>{message}</ErrorMessageText>
-          )}
-        />
-        <Controller
-          name="confirmPassword"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Input
-              icon="lock"
-              inputType="password"
-              placeholder="Repetir senha"
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-        />
-        <ErrorMessage
-          name="confirmPassword"
-          errors={errors}
-          render={({ message }) => (
-            <ErrorMessageText>{message}</ErrorMessageText>
-          )}
-        />
-      </Form>
-      <Button
-        styleButton="GREEN"
-        title="Cadastrar"
-        disabled={isDisableButton}
-        onPress={handleSubmit(handleRegister)}
-      />
-    </Container>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }

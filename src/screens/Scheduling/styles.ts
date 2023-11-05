@@ -14,6 +14,7 @@ export const Header = styled.View`
 
 export const BackButtonHeader = styled.View`
   margin-top: ${getStatusBarHeight()}px;
+
   width: 100%;
 `;
 
