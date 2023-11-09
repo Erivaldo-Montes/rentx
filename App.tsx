@@ -6,9 +6,7 @@ import { useFonts } from "expo-font";
 import { Routes } from "./src/routes";
 import { AppProvider } from "@/contexts/index";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import * as SplashScreen from "expo-splash-screen";
-import { Splashscreen } from "@/screens/SplahScreen";
-import * as NavigationBar from "expo-navigation-bar";
+
 import {
   Archivo_700Bold,
   Archivo_600SemiBold,
@@ -20,8 +18,6 @@ import {
   Inter_700Bold,
   Inter_500Medium,
 } from "@expo-google-fonts/inter";
-import { useFocusEffect } from "@react-navigation/native";
-SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -34,12 +30,11 @@ export default function App() {
     Archivo_500Medium,
   });
 
-  if (fontsLoaded) {
-    SplashScreen.hideAsync().then();
+  if (!fontsLoaded) {
+    return null;
   }
-
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
         <StatusBar
           barStyle={"dark-content"}
