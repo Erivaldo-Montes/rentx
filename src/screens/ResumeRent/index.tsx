@@ -38,6 +38,8 @@ import { StatusBar } from "react-native";
 import { Button } from "@/components/Button";
 import { format } from "date-fns";
 import { getPlatformDate } from "@/utils/getPlateformDate";
+import { AppError } from "@/utils/AppError";
+import Toast from "react-native-toast-message";
 
 type Params = {
   carId: string;
@@ -54,6 +56,8 @@ export function ResumeRent() {
   const [bullets, setBullets] = useState<BulletProps>();
   const [isLoading, setIsLoading] = useState(true);
   const [rentDate, setRentDate] = useState<{ start: string; end: string }>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const theme = useTheme();
 
   const navigation = useNavigation();
@@ -62,18 +66,35 @@ export function ResumeRent() {
   const { carId, markedDates } = route.params as Params;
 
   function handleRentNow() {
-    axios.post("/rentals", {
-      user_id: "1",
-      car_id: carId,
-      start_date: new Date(markedDates[0]),
-      end_date: new Date(markedDates[markedDates.length - 1]),
-      total: markedDates.length * car.rent.price,
-    });
-    navigation.navigate("ConfirmScreen", {
-      message: `Agora você só precisa ir${"\n"} até a concessionária da RENTX`,
-      nextScreenRoute: "Home",
-      title: "Carro alugado",
-    });
+    setIsSubmitting(true);
+
+    try {
+      axios.post("/rentals", {
+        user_id: "1",
+        car_id: carId,
+        start_date: new Date(markedDates[0]),
+        end_date: new Date(markedDates[markedDates.length - 1]),
+        total: markedDates.length * car.rent.price,
+      });
+      navigation.navigate("ConfirmScreen", {
+        message: `Agora você só precisa ir${"\n"} até a concessionária da RENTX`,
+        nextScreenRoute: "Home",
+        title: "Carro alugado",
+      });
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const text1 = isAppError
+        ? error.message
+        : "Não foi possível realizar o alugel";
+
+      Toast.show({
+        text1,
+        position: "top",
+        type: "error",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   function HeaderBulletUpdate(visibleItem: number) {
@@ -206,6 +227,8 @@ export function ResumeRent() {
               styleButton="GREEN"
               title="Alugar agora"
               onPress={handleRentNow}
+              disabled={isSubmitting}
+              isLoading={isSubmitting}
             />
           </ButtonContainer>
         </>

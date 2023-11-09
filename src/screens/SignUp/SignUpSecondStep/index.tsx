@@ -26,6 +26,8 @@ type confirmPasswordData = yup.InferType<typeof confirmPasswordSchema>;
 
 export function SignUpSecondStep() {
   const [isDisableButton, setIsDisableButton] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const navigation = useNavigation();
   const {
     control,
@@ -41,6 +43,7 @@ export function SignUpSecondStep() {
   });
 
   function handleRegister(data: confirmPasswordData) {
+    setIsSubmitting(true);
     navigation.navigate("ConfirmScreen", {
       title: "Conta criada",
       message: "",
@@ -125,6 +128,7 @@ export function SignUpSecondStep() {
           title="Cadastrar"
           disabled={isDisableButton}
           onPress={handleSubmit(handleRegister)}
+          isLoading={isSubmitting}
         />
       </Container>
     </TouchableWithoutFeedback>

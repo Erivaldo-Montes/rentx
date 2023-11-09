@@ -42,6 +42,7 @@ export function SignIn() {
   const [keyboardShow, setKeyboardShow] = useState(false);
   const [inputsIsEmpty, setInputIsEmpty] = useState(false);
   const [isFormError, setIsFormError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { signIn } = useAuth();
 
@@ -62,6 +63,7 @@ export function SignIn() {
   const navigation = useNavigation();
 
   function handleLogin(data: SignInData) {
+    setIsSubmitting(true);
     signIn(data);
   }
 
@@ -95,7 +97,6 @@ export function SignIn() {
     });
   }, [watchAll, errors]);
 
-  console.log("render");
   useFocusEffect(
     useCallback(() => {
       async function navBar() {
@@ -186,7 +187,8 @@ export function SignIn() {
               styleButton="RED"
               title="Login"
               onPress={handleSubmit(handleLogin)}
-              disabled={isFormError || inputsIsEmpty}
+              disabled={isFormError || inputsIsEmpty || isSubmitting}
+              isLoading={isSubmitting}
             />
             {!keyboardShow && (
               <Button

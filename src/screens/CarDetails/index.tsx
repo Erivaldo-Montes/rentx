@@ -9,6 +9,7 @@ import { ImageSlider } from "@/components/ImageSlider";
 import { Loading } from "@/components/Loading";
 import { AccessoryIcon } from "@/components/AccessoryIcon";
 import { Button } from "@/components/Button";
+import Toast from "react-native-toast-message";
 import Animated, {
   interpolate,
   useAnimatedScrollHandler,
@@ -31,6 +32,7 @@ import {
   ButtonContainer,
   Header,
 } from "./styles";
+import { AppError } from "@/utils/AppError";
 
 type Params = {
   carId: string;
@@ -87,6 +89,16 @@ export function CarDetails() {
       setCar(response.data);
     } catch (error) {
       console.log(error);
+      const isAppError = error instanceof AppError;
+      const text1 = isAppError
+        ? error.message
+        : "Não foi possível obter os dados do carro";
+
+      Toast.show({
+        text1,
+        position: "top",
+        type: "error",
+      });
     } finally {
       setIsLoading(false);
     }

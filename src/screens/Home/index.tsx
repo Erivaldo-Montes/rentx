@@ -7,15 +7,32 @@ import { CarDto } from "@/DTOs/Car";
 import { axios } from "@/services/api";
 import { useFocusEffect } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
+import { Loading } from "@/components/Loading";
+import Toast from "react-native-toast-message";
+import { AppError } from "@/utils/AppError";
 
 export function Home() {
   const [cars, setCars] = useState<CarDto[]>();
+  const [isLoading, setIsLoading] = useState(true);
 
   async function fetchCars() {
     try {
-      axios.get("/cars").then((response) => setCars(response.data));
+      setIsLoading(true);
+      const response = await axios.get("/cars");
+      setCars(response.data);
     } catch (error) {
       console.log(error);
+      const isAppError = error instanceof AppError;
+      const text1 = isAppError
+        ? error.message
+        : "Não foi possível obter os carros";
+      Toast.show({
+        text1,
+        position: "top",
+        type: "error",
+      });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -43,16 +60,22 @@ export function Home() {
         backgroundColor={"transparent"}
         translucent
       />
-      <HomeHeader />
-      <CardsList>
-        <FlatList
-          data={cars}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 150 }}
-          renderItem={({ item }) => <CarCard car={item} />}
-        />
-      </CardsList>
+      {!isLoading ? (
+        <>
+          <HomeHeader />
+          <CardsList>
+            <FlatList
+              data={cars}
+              keyExtractor={(item) => item.id}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ paddingBottom: 150 }}
+              renderItem={({ item }) => <CarCard car={item} />}
+            />
+          </CardsList>
+        </>
+      ) : (
+        <Loading />
+      )}
     </Container>
   );
 }
